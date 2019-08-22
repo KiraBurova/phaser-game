@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "parcel game/index.js",
-    "build": "parcel build game/index.js --out-dir dist",
+    "start": "parcel game/index.html",
+    "build": "parcel build game/index.html --out-dir dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

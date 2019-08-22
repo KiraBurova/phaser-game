@@ -1,3 +1,6 @@
+import create from './scene'
+import update from './update'
+
 const config = {
     type: Phaser.AUTO,
     width: 800,
@@ -9,7 +12,8 @@ const config = {
         }
     },
     scene: {
-        create: create
+        create,
+        update
     }
 };
 

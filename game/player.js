@@ -11,7 +11,7 @@ const player = ({scene}) => {
         // dragY: 60,
     })
 
-    playerObj = scene.add.circle(20, 20, 10, 0xff0000)
+    playerObj = scene.add.circle(410, 400, 10, 0xff0000)
 
     playerPhysicsGroup.add(playerObj)
 }

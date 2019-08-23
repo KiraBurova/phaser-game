@@ -1,15 +1,15 @@
+import { updateScore} from './score';
+
 const speed = 600;
+let globalScene;
 
-const weapon = ({ scene, fromX, fromY, toX, toY, enemy }) => {
-  const weaponPhysicsGroup = scene.physics.add.group({
-    angularDrag: 5,
-    angularVelocity: 60,
-    collideWorldBounds: true,
-    dragX: 10,
-    dragY: 10,
-  });
+export const createWeapon = ({scene}) => {
+  globalScene = scene;
+}
 
-  const bullet = scene.add.circle(fromX, fromY, 2, 0xff0000);
+const weapon = ({ scene, fromX, fromY, toX, toY, aliens }) => {
+  const weaponPhysicsGroup = globalScene.physics.add.group({});
+  const bullet = globalScene.add.circle(fromX, fromY, 2, 0xff0000);
 
   weaponPhysicsGroup.add(bullet);
 
@@ -19,12 +19,15 @@ const weapon = ({ scene, fromX, fromY, toX, toY, enemy }) => {
 
   weaponPhysicsGroup.setVelocity(velocityX, velocityY);
   
-  scene.physics.add.collider(weaponPhysicsGroup, enemy, () => console.log('heeee'));
+  globalScene.physics.add.collider(weaponPhysicsGroup, aliens, (b, alien) => {
+    console.log('hit')
+    // bullet.destroy();
+    // b.destroy()
+    // alien.destroy();
+    // updateScore(10);
+  });
 
-  //   setTimeout(() => {
-  //     console.log(1);
-  //     bullet.destroy(), 1000;
-  //   });
+  setTimeout(() => bullet.destroy(), 1000);
 };
 
 export default weapon;

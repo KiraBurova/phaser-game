@@ -1,4 +1,4 @@
-import create from './scene'
+import create from './create'
 import update from './update'
 
 const config = {
@@ -13,7 +13,13 @@ const config = {
     },
     scene: {
         create,
-        update
+        update,
+        preload: function() {
+            this.load.spritesheet('aliens', 
+        'assets/aliens.png',
+        { frameWidth: 32, frameHeight: 48 }
+    );
+        }
     }
 };
 

@@ -1,5 +1,5 @@
-import gun from './gun';
-import enemy from './enemy';
+import weapon from './weapon';
+import enemy from './alien';
 
 let playerPhysicsGroup = null;
 let playerObj = null;
@@ -43,7 +43,7 @@ export const updatePlayerPosition = ({ scene }) => {
 export const shoot = ({ scene }) => {
   scene.input.on('pointerdown', function(pointer) {
     if (pointer.button === 0) {
-      gun({
+      weapon({
         scene,
         fromX: playerObj.x,
         fromY: playerObj.y,

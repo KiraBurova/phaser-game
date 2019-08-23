@@ -1,9 +1,9 @@
 import player from './player'
-import enemy from './enemy'
+import createAlien from './alien'
 
 function create() {
     player({scene: this})
-    enemy({scene: this})
+    createAlien({scene: this})
 }
 
 export default create

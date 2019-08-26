@@ -1,22 +1,22 @@
+import { createWeapon } from './weapon';
+
 const createAlien = ({ scene }) => {
   const aliens = scene.physics.add.group();
   let alien;
 
-
   for (var i = 0; i < 10; i++) {
-    for(var j = 0; j < 4; j++) {
+    for (var j = 0; j < 4; j++) {
       alien = scene.add.circle(300 + i * 20, 100 + j * 20, 5, 0xabcdef);
-      aliens.add(alien)
+      aliens.add(alien);
     }
   }
-  animateAliens(scene, aliens)
-
-  return aliens
+  animateAliens(scene, aliens);
+  createWeapon({ scene });
+  return aliens;
 };
 
 const animateAliens = (scene, aliens) => {
-
-  aliens.children.iterate (child => {
+  aliens.children.iterate(child => {
     scene.tweens.add({
       targets: child,
       ease: 'Linear',
@@ -24,8 +24,8 @@ const animateAliens = (scene, aliens) => {
       x: child.x + 15,
       repeat: -1,
       yoyo: true,
-      });
-    }, scene);
-}
+    });
+  }, scene);
+};
 
 export default createAlien;

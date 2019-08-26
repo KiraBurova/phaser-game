@@ -1,33 +1,42 @@
-import { updateScore} from './score';
+import { updateScore, gameWon } from './score';
 
 const speed = 600;
-let globalScene;
+let globalScene = null;
 
-export const createWeapon = ({scene}) => {
-  globalScene = scene;
-}
+export const createWeapon = scene => {
+  globalScene = scene.scene;
+};
 
-const weapon = ({ scene, fromX, fromY, toX, toY, aliens }) => {
-  const weaponPhysicsGroup = globalScene.physics.add.group({});
-  const bullet = globalScene.add.circle(fromX, fromY, 2, 0xff0000);
+const weapon = ({ fromX, fromY, toX, toY, enemy }) => {
+  const playerBullet = globalScene.add.circle(fromX, fromY, 5, 0xff66ff);
+  const playerBullets = globalScene.physics.add.group();
 
-  weaponPhysicsGroup.add(bullet);
+  playerBullets.add(playerBullet);
 
-  const delta = Math.sqrt(Math.pow(toX - fromX, 2) + Math.pow(toY - fromY, 2));
-  const velocityX = (speed / delta) * (toX - fromX);
-  const velocityY = (speed / delta) * (toY - fromY);
+  const d = Math.sqrt(Math.pow(toX - fromX, 2) + Math.pow(toY - fromY, 2));
+  const velocityX = (speed / d) * (toX - fromX);
+  const velocityY = (speed / d) * (toY - fromY);
+  playerBullets.setVelocity(velocityX, velocityY);
 
-  weaponPhysicsGroup.setVelocity(velocityX, velocityY);
-  
-  globalScene.physics.add.collider(weaponPhysicsGroup, aliens, (b, alien) => {
-    console.log('hit')
-    // bullet.destroy();
-    // b.destroy()
-    // alien.destroy();
-    // updateScore(10);
-  });
+  globalScene.physics.add.collider(
+    enemy,
+    playerBullets,
+    (overlappingBullet, overlappingAlien) => {
+      onAlienHit(overlappingAlien, overlappingBullet);
+    },
+    null,
+    globalScene,
+  );
 
-  setTimeout(() => bullet.destroy(), 1000);
+  function onAlienHit(overlappingAlien, overlappingBullet) {
+    overlappingBullet.destroy();
+    overlappingAlien.destroy();
+    updateScore(10);
+
+    if (enemy.children.size === 0) {
+      gameWon({ scene: globalScene });
+    }
+  }
 };
 
 export default weapon;

@@ -1,4 +1,4 @@
-import weapon, {createWeapon} from './weapon';
+import weapon, { createWeapon } from './weapon';
 
 let playerPhysicsGroup = null;
 let playerObj = null;
@@ -8,13 +8,13 @@ let globalEnemy = null;
 const player = ({ scene, enemy }) => {
   globalEnemy = enemy;
   playerPhysicsGroup = scene.physics.add.group({
-    collideWorldBounds: true
+    collideWorldBounds: true,
   });
 
   playerObj = scene.add.circle(410, 400, 10, 0xff0000);
 
   playerPhysicsGroup.add(playerObj);
-  createWeapon({scene})
+  createWeapon({ scene });
 };
 
 export const updatePlayerPosition = ({ scene }) => {
@@ -47,7 +47,7 @@ export const shoot = ({ scene }) => {
         fromY: playerObj.y,
         toX: pointer.position.x,
         toY: pointer.position.y,
-        aliens: globalEnemy,
+        enemy: globalEnemy,
       });
     }
   });

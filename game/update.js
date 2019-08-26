@@ -1,8 +1,7 @@
-import { updatePlayerPosition, shoot } from './player';
+import { updatePlayerPosition } from './player';
 
 function update() {
   updatePlayerPosition({ scene: this });
-  shoot({ scene: this });
 }
 
 export default update;

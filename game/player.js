@@ -2,7 +2,6 @@ import weapon, { createWeapon } from './weapon';
 
 let playerPhysicsGroup = null;
 let playerObj = null;
-
 let globalEnemy = null;
 
 const player = ({ scene, enemy }) => {
